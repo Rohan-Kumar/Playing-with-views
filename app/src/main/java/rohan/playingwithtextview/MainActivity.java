@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView scaleGesture;
+    TextView textView;
     ScaleGestureDetector scaleGestureDetector;
     float dX, dY;
 
@@ -20,16 +20,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        scaleGesture = (TextView) findViewById(R.id.text);
+        textView = (TextView) findViewById(R.id.text);
 
-        scaleGesture.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                return false;
-            }
-        });
-
-        scaleGesture.setOnTouchListener(new View.OnTouchListener() {
+        textView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 switch (event.getAction()) {
@@ -74,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
             // TODO Auto-generated method stub
-            float size = scaleGesture.getTextSize();
+            float size = textView.getTextSize();
             Log.d("TextSizeStart", String.valueOf(size));
 
             float factor = detector.getScaleFactor();
@@ -83,10 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
             float product = size*factor;
             Log.d("TextSize", String.valueOf(product));
-            scaleGesture.setTextSize(TypedValue.COMPLEX_UNIT_PX, product);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, product);
 
-            size = scaleGesture.getTextSize();
-            Log.d("TextSizeEnd", String.valueOf(size));
             return true;
         }
     }
